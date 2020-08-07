@@ -1,6 +1,7 @@
 const left = document.querySelector('.chevron-left-wrapper');
 const right = document.querySelector('.chevron-right-wrapper');
 const movingContainer = document.querySelector('.images-container-flex');
+const purple = document.querySelector('.show-section');
 let trans = 0;
 
 const selectContainer = Array.from(document.querySelectorAll('.imgshow-container'));
@@ -10,14 +11,23 @@ show.forEach(item => {
     item.classList.add('d-none');
 });
 
-selectContainer[0].classList.add('selected');
+// selectContainer[0].classList.add('selected');
 show[0].classList.remove('d-none');
+purple.style.display = 'none';
+
 
 selectContainer.forEach(sel => {
     let index = selectContainer.indexOf(sel);
     sel.addEventListener('click', e => {
+        purple.style.display = 'block';
         const filt = selectContainer.filter(item => item.classList.contains('selected'));
-        filt[0].classList.remove('selected');
+        if (filt.length === 0) {
+            console.log('no-filt')
+        }
+
+        else {
+            filt[0].classList.remove('selected');
+        }
         const filtSecond = show.filter(item => !item.classList.contains('d-none'));
         filtSecond[0].classList.add('d-none');
         sel.classList.add('selected');
